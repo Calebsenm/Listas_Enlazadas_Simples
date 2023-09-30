@@ -1,7 +1,16 @@
+package ListaEnlazadas;
+
+
 
 public class ListaEnlazada {
 
     private Nodo cabeza;
+
+    
+    
+    public Nodo getCabeza() {
+        return cabeza;
+    }
 
     public ListaEnlazada() {
         cabeza = null;
@@ -20,6 +29,8 @@ public class ListaEnlazada {
             nuevo.setSiguiente(temporal);
             cabeza = nuevo;
 
+            System.out.println(" - " + cabeza.toString());
+            
         }
     }
 

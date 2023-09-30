@@ -1,3 +1,5 @@
+package ListaEnlazadas;
+
 
 public class Nodo {
 
@@ -7,7 +9,7 @@ public class Nodo {
     private int edad;
     private int curso;
     private String nombreAcudiente;
-    private String telefonoAcudiente;
+    private int telefonoAcudiente;
 
     private Nodo siguiente;
 
@@ -18,7 +20,7 @@ public class Nodo {
         this.edad = 0;
         this.curso = 0;
         this.nombreAcudiente = "";
-        this.telefonoAcudiente = "";
+        this.telefonoAcudiente = 0;
         this.siguiente = null;
     }
 
@@ -70,11 +72,11 @@ public class Nodo {
         this.nombreAcudiente = nombreAcudiente;
     }
 
-    public String getTelefonoAcudiente() {
+    public int getTelefonoAcudiente() {
         return telefonoAcudiente;
     }
 
-    public void setTelefonoAcudiente(String telefonoAcudiente) {
+    public void setTelefonoAcudiente(int telefonoAcudiente) {
         this.telefonoAcudiente = telefonoAcudiente;
     }
 
