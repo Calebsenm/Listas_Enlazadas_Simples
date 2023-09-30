@@ -5,8 +5,6 @@ package ListaEnlazadas;
 public class ListaEnlazada {
 
     private Nodo cabeza;
-
-    
     
     public Nodo getCabeza() {
         return cabeza;
@@ -28,28 +26,30 @@ public class ListaEnlazada {
             Nodo nuevo = nuevoNodo;
             nuevo.setSiguiente(temporal);
             cabeza = nuevo;
-
-            System.out.println(" - " + cabeza.toString());
             
         }
     }
 
     public void agregarAlFinal(Nodo nuevoNodo) {
 
-        int contador = 0;
-        Nodo temporal = cabeza;
+        if ( cabeza == null){
+            cabeza = nuevoNodo;
+        } else {
 
-        for (;;) {
-            if (cabeza == null) {
+        
+
+        Nodo temporal = cabeza;
+       for (;;) {
+
+            if (temporal.getSiguiente()  == null ) {
                 break;
             }
-
-            temporal = temporal.getSiguiente();
-            contador++;
-
+            
+           temporal =  temporal.getSiguiente();
         }
-
-        temporal = nuevoNodo;
+ 
+        temporal.setSiguiente(nuevoNodo);
+    }
     }
 
     public void insertarEntreNodos(Nodo nuevoNodo, int indice) {
@@ -203,4 +203,29 @@ public class ListaEnlazada {
                 + "";
     }
 
+    
+    
+    // Metodo para Tester Los Nodos 
+    public void Recorrer(){
+        
+        Nodo temporal = cabeza;
+        for (;;) {
+            if (temporal == null) {
+                break;
+            }
+            String dato = "";
+            dato +=  "[ "+temporal.getNombre()+ " ] -> ";
+
+            if (temporal.getSiguiente() == null) {
+                dato += "null\n";
+
+            }
+
+            System.out.print(dato );
+            temporal = temporal.getSiguiente();
+        }
+        
+
+    }
+    
 }

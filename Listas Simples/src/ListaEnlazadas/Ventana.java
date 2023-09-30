@@ -24,32 +24,37 @@ public class Ventana extends javax.swing.JFrame {
         modelo.addColumn("Edad");
         modelo.addColumn("Curso");
         modelo.addColumn("Acudiente");
-        modelo.addColumn("Telefono AcudienteTelefono");
+        modelo.addColumn("Telefono Acudiente");
 
-        ListaEnlazada temporal = new ListaEnlazada();
-        temporal  = estudiantes;
+        ListaEnlazada temporal = new ListaEnlazada();;
         
-        
-        for (;;) {
-            if (estudiantes == null) {
-                break;
-            }
+        try {
 
-            modelo.addRow(new Object[]{
-                temporal.getCabeza().getIdentificacion(),
+            for (;;) {
+               
+                if (temporal.getCabeza().getSiguiente() == null) {
+                    break;
+                }
+
                 
-                 temporal.getCabeza().getNombre(),
-                 temporal.getCabeza().getSexo(),
-                 temporal.getCabeza().getEdad(),
-                 temporal.getCabeza().getCurso(),
-                temporal.getCabeza().getNombreAcudiente(),
-                 temporal.getCabeza().getTelefonoAcudiente()
+                modelo.addRow(new Object[]{
+                    temporal.getCabeza().getIdentificacion(),
+                    temporal.getCabeza().getNombre(),
+                    temporal.getCabeza().getSexo(),
+                    temporal.getCabeza().getEdad(),
+                    temporal.getCabeza().getCurso(),
+                    temporal.getCabeza().getNombreAcudiente(),
+                    temporal.getCabeza().getTelefonoAcudiente()
 
-            });
-           
+                });
 
+                JOptionPane.showMessageDialog(null, estudiantes.getCabeza().toString());
+                temporal.getCabeza().setSiguiente(estudiantes.getCabeza().getSiguiente());
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al Cargar Datos de tipo " + e );
         }
-
         EstudiantesTabla.setModel(modelo);
     }
 
@@ -103,7 +108,7 @@ public class Ventana extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(EstudiantesTabla);
 
-        jButton1.setText("Agreagar  Al Final");
+        jButton1.setText("Agregar Inicio");
 
         jLabel1.setText("Nombres");
 
@@ -126,7 +131,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Agreagar ");
+        jButton3.setText("Agreagar Final");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -202,8 +207,8 @@ public class Ventana extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(65, 65, 65)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +227,7 @@ public class Ventana extends javax.swing.JFrame {
                                         .addComponent(jButton3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton1)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -346,29 +351,29 @@ public class Ventana extends javax.swing.JFrame {
             nodo.setCurso(Integer.parseInt(Curso.getText()));
             nodo.setNombreAcudiente(NombreAcudiente.getText());
             nodo.setTelefonoAcudiente(Integer.parseInt(TelefonoAcudiente.getText()));
-
-            if (Sexo.getText().equals("Mujer") || Sexo.getText().equals("Hombre")) {
-
-                int tipo = Integer.parseInt(Curso.getText());
-
-                if (tipo >= 0 || tipo <= 5) {
-                    estudiantes.agregarAlPricipio(nodo);
-                    
-                    JOptionPane.showMessageDialog(null, "Datos Guardados ");
-                    actualizarTabla();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Solo coloca 1 - 5 ");
-
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Solo puedes Colocar Hombre o Mujer ");
-            }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error :( " + e);
 
         }
+
+        if (Sexo.getText().equals("Mujer") || Sexo.getText().equals("Hombre")) {
+            int tipo = Integer.parseInt(Curso.getText());
+            if (tipo >= 0 || tipo <= 5) {
+
+                estudiantes.agregarAlFinal(nodo);
+                JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente \n ");
+                actualizarTabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo coloca 1 - 5 ");
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo puedes Colocar Hombre o Mujer ");
+        }
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
