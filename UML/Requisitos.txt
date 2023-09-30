@@ -1,0 +1,55 @@
+
+Objetivo 
+Desarrollar una aplicación en Java 
+(utilizando Nodos, Listas Sencillas Enlazadas, JFrame y JTable), 
+aplicando los conceptos aprendidos sobre listas enlazadas simples.
+
+Descripción del Problema
+
+Una Institución Educativa de Básica Primaria quiere diseñar 
+una aplicación para recolectar  la  información  de  sus  
+estudiantes,  entre  los  datos  básicos  que  se quieren 
+recolectar de cada estudiante están: la identificación, 
+nombre y sexo. Se debe tener en cuenta que por políticas 
+del estado los niños que entran a cursar la primaria tienen 
+que ser mayores de 6 años; además la institución cuenta con 
+los cursos de primero a quinto de primaria. Adicionalmente, 
+las directivas del plantel requieren la información de contacto 
+de algún acudiente del estudiante, como pueden ser nombre del 
+acudiente y teléfono.
+
+
+Requerimientos
+
+La Institución  Educativa,  requiere  que  la  aplicación  realice  
+las  siguientes operaciones sobre los nodos de la lista enlazada:
+
+Requerimientos de Estructuras de Datos
+
+• Estructura de datos dinámica (lista enlazada) 
+para registrar la información de los estudiantes. 
+
+
+Requerimientos Funcionales
+
+• Agregar la información de un estudiante al final de la lista.
+• Insertar la información de un nuevo estudiante, entre dos nodos existentes.
+• Agregar la información de un estudiante al principio de la lista (agregar nodos por la cabeza de la lista).
+• Buscar la información de un estudiante por identificación.
+• Buscar la información de un estudiante nombre. Visualizar la información de contacto del acudiente.
+• Eliminar la información de los estudiantes, una vez finalicen el grado quinto de primaria.
+
+Requerimientos Reportes
+
+El director de la Institución Educativa requiere que la aplicación cuente con un menú 
+de opciones para realizar las operaciones descritas anteriormente 
+y para generar los siguientes informes sobre los datos almacenados en la lista:
+
+• Cuáles son los estudiantes de mayor edad en los cursos primero y quinto, 
+se requiere saber su nombre y sexo.
+
+• Se requiere un informe con los nombre de las mujeres que están 
+en el grado quinto de primaria, la cantidad de mujeres del curso y la edad promedio.
+
+• Informe detallado del total de mujeres y hombres que ingresan al primer grado
+
