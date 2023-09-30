@@ -21,7 +21,6 @@ public class Main {
         Nodo nodo4 = new Nodo();
         nodo4.setNombre("D");
 
-
         listaDatos.agregarAlPricipio(nodo1);
         listaDatos.Recorrer();
 
