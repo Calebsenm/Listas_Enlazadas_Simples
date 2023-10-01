@@ -5,11 +5,11 @@ package ListaEnlazadas;
 public class Main {
     public static void main(String[] args){
     
-        //Ventana vn = new Ventana();
-        //vn.setVisible(true);
+        Ventana vn = new Ventana();
+        vn.setVisible(true);
 
 
-         
+         /* 
         ListaEnlazada listaDatos = new ListaEnlazada();
         Nodo nodo1 = new Nodo();
         nodo1.setNombre("A");
@@ -45,7 +45,7 @@ public class Main {
 
         listaDatos.eliminarEstudiantes();
         listaDatos.Recorrer();
-        
+        */
     }
             
 }

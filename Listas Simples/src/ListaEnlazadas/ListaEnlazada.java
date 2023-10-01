@@ -135,18 +135,19 @@ public class ListaEnlazada {
     public void eliminarEstudiantes() {
 
         Nodo temporal = cabeza;
+        Nodo nodoSiguiente = cabeza.getSiguiente();
+
         for (;;) {
             if (temporal == null) {
                 break;
             }
 
-            if ( temporal.getCurso() == 5) {
-                
-                temporal = temporal.getSiguiente();
-                //break;
+            if (temporal.getCurso() == 5 || temporal.getSiguiente().getCurso() == 5) {
+
+                nodoSiguiente = temporal.getSiguiente().getSiguiente();
+                temporal.setSiguiente(nodoSiguiente);
 
             }
-
             temporal = temporal.getSiguiente();
         }
 
@@ -164,9 +165,6 @@ public class ListaEnlazada {
             if (temporal == null) {
                 break;
             }
-            if (temporal.getSiguiente() == null) {
-                break;
-            }
 
             if (temporal.getCurso() == 1 && temporal.getEdad() > estudiantePrimeroMayor) {
                 estudiantePrimero = ""
@@ -182,6 +180,8 @@ public class ListaEnlazada {
                         + "";
                 estudianteQuintoMayor = temporal.getEdad();
             }
+
+            temporal = temporal.getSiguiente();
         }
         return estudiantePrimero + "\n\n" + estudianteQuinto;
     }
@@ -197,16 +197,15 @@ public class ListaEnlazada {
                 break;
             }
 
-       
-
             if (temporal.getSexo().equals("Mujer") && temporal.getCurso() == 5) {
                 nombreMujeres += temporal.getNombre() + "\n";
                 cantidadMujeres++;
                 promedioEdadMujeres += temporal.getEdad();
             }
+            
             temporal = temporal.getSiguiente();
         }
-        promedioEdadMujeres = cantidadMujeres / promedioEdadMujeres;
+        promedioEdadMujeres =  promedioEdadMujeres / cantidadMujeres;
 
         return ""
                 + nombreMujeres + "\n"
@@ -223,8 +222,6 @@ public class ListaEnlazada {
             if (temporal == null) {
                 break;
             }
-
-    
 
             if (temporal.getSexo().equals("Hombre") && temporal.getCurso() == 1) {
                 cantidadHombres++;
