@@ -15,7 +15,7 @@ public class Ventana extends javax.swing.JFrame {
         estudiantes = new ListaEnlazada();
     }
 
-    //Metodo Para actualizar Tabla
+    // Metodo Para actualizar Tabla
     public void actualizarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Identificacion");
@@ -26,39 +26,41 @@ public class Ventana extends javax.swing.JFrame {
         modelo.addColumn("Acudiente");
         modelo.addColumn("Telefono Acudiente");
 
-        ListaEnlazada temporal = new ListaEnlazada();;
-        
+        Nodo temporal = new Nodo();
+        temporal = estudiantes.getCabeza();
+
+        //JOptionPane.showMessageDialog(null, temporal.toString());
         try {
 
             for (;;) {
-               
-                if (temporal.getCabeza().getSiguiente() == null) {
+
+                modelo.addRow(new Object[]{
+                    temporal.getIdentificacion(),
+                    temporal.getNombre(),
+                    temporal.getSexo(),
+                    temporal.getEdad(),
+                    temporal.getCurso(),
+                    temporal.getNombreAcudiente(),
+                    temporal.getTelefonoAcudiente()
+
+                });
+                if (temporal.getSiguiente() == null) {
                     break;
                 }
 
-                
-                modelo.addRow(new Object[]{
-                    temporal.getCabeza().getIdentificacion(),
-                    temporal.getCabeza().getNombre(),
-                    temporal.getCabeza().getSexo(),
-                    temporal.getCabeza().getEdad(),
-                    temporal.getCabeza().getCurso(),
-                    temporal.getCabeza().getNombreAcudiente(),
-                    temporal.getCabeza().getTelefonoAcudiente()
-
-                });
-
-                JOptionPane.showMessageDialog(null, estudiantes.getCabeza().toString());
-                temporal.getCabeza().setSiguiente(estudiantes.getCabeza().getSiguiente());
+                temporal = temporal.getSiguiente();
 
             }
+
+            EstudiantesTabla.setModel(modelo);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error al Cargar Datos de tipo " + e );
+            JOptionPane.showMessageDialog(null, "Error al Cargar Datos de tipo " + e);
         }
-        EstudiantesTabla.setModel(modelo);
+
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -79,14 +81,14 @@ public class Ventana extends javax.swing.JFrame {
         Curso = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         NombreAcudiente = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -109,6 +111,11 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane1.setViewportView(EstudiantesTabla);
 
         jButton1.setText("Agregar Inicio");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombres");
 
@@ -124,17 +131,17 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel7.setText("Curso");
 
-        jButton2.setText("Mayor");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("Agreagar Final");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Buscar Acudiente");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
             }
         });
 
@@ -145,38 +152,38 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Buscar Acudiente");
+        jButton5.setText("Eliminar 5 Grado");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Eliminar 5 Grado");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setText("Buscar Por Identificacion");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Informacion Mujeres");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setText("Buscar Identificacion");
+        jButton8.setText("Mayor");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Hombres y Mujeres");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButton12.setText("Informacion Mujeres");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("Informacion Hombre Mujer");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
             }
         });
 
@@ -187,33 +194,26 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(Nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(36, 36, 36)
-                                    .addComponent(Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(55, 55, 55)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jButton3)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(12, 12, 12)
@@ -222,27 +222,37 @@ public class Ventana extends javax.swing.JFrame {
                                                     .addComponent(Curso, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(TelefonoAcudiente, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(TelefonoAcudiente, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                                        .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(294, 294, 294))
+                                    .addComponent(jButton4)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(Nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(36, 36, 36)
+                                    .addComponent(Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton7)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(11, 11, 11))
+                                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,11 +275,11 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(17, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Curso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,27 +290,26 @@ public class Ventana extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TelefonoAcudiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
+                                    .addComponent(TelefonoAcudiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton7)
-                                    .addComponent(jButton8))
+                                    .addComponent(jButton11)
+                                    .addComponent(jButton12))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton10)
+                                    .addComponent(jButton13))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton5)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6)))))
-                .addGap(12, 12, 12)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(9, 9, 9)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -308,39 +317,171 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formComponentResized
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Nodo nodo = new Nodo();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        try {
+            nodo.setIdentificacion(Integer.parseInt(Identificacion.getText()));
+            nodo.setNombre(Nombres.getText());
+            nodo.setSexo(Sexo.getText());
+            nodo.setEdad(Integer.parseInt(Edad.getText()));
+            nodo.setCurso(Integer.parseInt(Curso.getText()));
+            nodo.setNombreAcudiente(NombreAcudiente.getText());
+            nodo.setTelefonoAcudiente(Integer.parseInt(TelefonoAcudiente.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error :( " + e);
+
+        }
+
+        if (Sexo.getText().equals("Mujer") || Sexo.getText().equals("Hombre")) {
+            int tipo = Integer.parseInt(Curso.getText());
+            if (tipo >= 0 || tipo <= 5) {
+
+                estudiantes.agregarAlPricipio(nodo);
+
+                JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente \n ");
+                actualizarTabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo coloca 1 - 5 ");
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo puedes Colocar Hombre o Mujer ");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+
+        String estudiante = JOptionPane.showInputDialog("Ingresa El nombre del estudiante ");
+        String informacion = estudiantes.buscarAcudiente(estudiante);
+
+        JOptionPane.showMessageDialog(null, informacion);
+
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+
+        int index = Integer.parseInt(JOptionPane.showInputDialog("Ingresa La posicion donde Deseas agregar el nuvo alumno "));
+
+        Nodo nodo = new Nodo();
+
+        try {
+            nodo.setIdentificacion(Integer.parseInt(Identificacion.getText()));
+            nodo.setNombre(Nombres.getText());
+            nodo.setSexo(Sexo.getText());
+            nodo.setEdad(Integer.parseInt(Edad.getText()));
+            nodo.setCurso(Integer.parseInt(Curso.getText()));
+            nodo.setNombreAcudiente(NombreAcudiente.getText());
+            nodo.setTelefonoAcudiente(Integer.parseInt(TelefonoAcudiente.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error :( " + e);
+
+        }
+
+        if (Sexo.getText().equals("Mujer") || Sexo.getText().equals("Hombre")) {
+            int tipo = Integer.parseInt(Curso.getText());
+            if (tipo >= 0 || tipo <= 5) {
+
+                estudiantes.insertarEntreNodos(nodo, index - 1);
+
+                JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente \n ");
+                actualizarTabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo coloca 1 - 5 ");
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo puedes Colocar Hombre o Mujer ");
+        }
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        try {
+            estudiantes.eliminarEstudiantes();
+            JOptionPane.showMessageDialog(null, "Estudiantes Eliminados ");
+            actualizarTabla();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un herror ");
+        }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        int identificacion = Integer.parseInt(JOptionPane.showInputDialog("Ingreda La identidicacion \n del estudiante que deseas buscar "));
+        String informacion = estudiantes.buscarIdentificacion(identificacion);
+
+        JOptionPane.showMessageDialog(null, informacion);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+     
+          try{
+            String  informacion = estudiantes.informacionMayor();
+            JOptionPane.showMessageDialog(null,informacion);
+        
+        } catch(Exception e) {
+                  JOptionPane.showMessageDialog(null,"Ocurrio Un herror ");
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+        
+        try{
+            String  informacion = estudiantes.informacionMujer();
+            JOptionPane.showMessageDialog(null,informacion);
+        
+        } catch(Exception e) {
+                  JOptionPane.showMessageDialog(null,"Ocurrio Un herror ");
+        }
+        
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    
+          try{
+            String  informacion = estudiantes.informeMujeresHombres();
+            JOptionPane.showMessageDialog(null,informacion);
+        
+        } catch(Exception e) {
+                  JOptionPane.showMessageDialog(null,"Ocurrio Un herror ");
+        }
+        
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_formComponentResized
+        // TODO add your handling code here:
+    }// GEN-LAST:event_formComponentResized
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
         Nodo nodo = new Nodo();
 
         try {
@@ -361,6 +502,7 @@ public class Ventana extends javax.swing.JFrame {
             if (tipo >= 0 || tipo <= 5) {
 
                 estudiantes.agregarAlFinal(nodo);
+
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente \n ");
                 actualizarTabla();
 
@@ -373,17 +515,20 @@ public class Ventana extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Solo puedes Colocar Hombre o Mujer ");
         }
 
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }// GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -401,7 +546,7 @@ public class Ventana extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -421,14 +566,14 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField Sexo;
     private javax.swing.JTextField TelefonoAcudiente;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,11 +1,11 @@
 package ListaEnlazadas;
 
-
+import javax.swing.JOptionPane;
 
 public class ListaEnlazada {
 
     private Nodo cabeza;
-    
+
     public Nodo getCabeza() {
         return cabeza;
     }
@@ -26,82 +26,107 @@ public class ListaEnlazada {
             Nodo nuevo = nuevoNodo;
             nuevo.setSiguiente(temporal);
             cabeza = nuevo;
-            
+
         }
     }
 
     public void agregarAlFinal(Nodo nuevoNodo) {
 
-        if ( cabeza == null){
+        if (cabeza == null) {
             cabeza = nuevoNodo;
         } else {
 
-        
+            Nodo temporal = cabeza;
+            for (;;) {
 
-        Nodo temporal = cabeza;
-       for (;;) {
+                if (temporal.getSiguiente() == null) {
+                    break;
+                }
 
-            if (temporal.getSiguiente()  == null ) {
-                break;
+                temporal = temporal.getSiguiente();
             }
-            
-           temporal =  temporal.getSiguiente();
+
+            temporal.setSiguiente(nuevoNodo);
         }
- 
-        temporal.setSiguiente(nuevoNodo);
-    }
     }
 
     public void insertarEntreNodos(Nodo nuevoNodo, int indice) {
-        int contador = 0;
-        Nodo temporal = cabeza;
 
-        for (; contador < indice - 1;) {
-            temporal = temporal.getSiguiente();
-            contador++;
+        if (indice >= 0) {
+
+            int contador = 0;
+            Nodo temporal = cabeza;
+
+            for (; contador < indice - 1;) {
+                if (temporal.getSiguiente() == null) {
+                    break;
+                }
+
+                temporal = temporal.getSiguiente();
+                contador++;
+            }
+
+            if (indice != 0) {
+                Nodo siguiente = temporal.getSiguiente();
+                Nodo nuevo = nuevoNodo;
+
+                temporal.setSiguiente(nuevo);
+                nuevo.setSiguiente(siguiente);
+
+            } else if (indice == 0) {
+                agregarAlPricipio(nuevoNodo);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Indice No existe");
+
         }
-
-        Nodo siguiente = temporal.getSiguiente();
-        Nodo nuevo = nuevoNodo;
-
-        temporal.setSiguiente(nuevo);
-        nuevo.setSiguiente(siguiente);
-
     }
 
     public String buscarIdentificacion(int identificacion) {
         String informacion = "";
-        int contador = 0;
-        Nodo temporal = cabeza;
 
-        for (;;) {
-            if (identificacion == temporal.getIdentificacion()) {
-                informacion = temporal.toString();
-                break;
+        try {
+
+            int contador = 0;
+            Nodo temporal = cabeza;
+
+            for (;;) {
+                if (identificacion == temporal.getIdentificacion()) {
+                    informacion = temporal.toString();
+                    break;
+                }
+                temporal = temporal.getSiguiente();
+                contador++;
             }
-            temporal = temporal.getSiguiente();
-            contador++;
+        } catch (Exception e) {
+            informacion = "El estudiante no existe";
         }
-
         return informacion;
     }
 
     public String buscarAcudiente(String NombreEstudiante) {
+
         String informacion = "";
-        int contador = 0;
-        Nodo temporal = cabeza;
+        try {
 
-        for (;;) {
-            if (temporal.getNombre().equals(NombreEstudiante)) {
-                informacion = ""
-                        + "Nombre Acudiente: " + temporal.getNombreAcudiente()
-                        + "\nTelefono Acudiente: " + temporal.getTelefonoAcudiente()
-                        + "\n";
+            int contador = 0;
+            Nodo temporal = cabeza;
 
-                break;
+            for (;;) {
+                if (temporal.getNombre().equals(NombreEstudiante)) {
+                    informacion = ""
+                            + "Nombre Acudiente: " + temporal.getNombreAcudiente()
+                            + "\nTelefono Acudiente: " + temporal.getTelefonoAcudiente()
+                            + "\n";
+
+                    break;
+                }
+                temporal = temporal.getSiguiente();
+                contador++;
             }
-            temporal = temporal.getSiguiente();
-            contador++;
+        } catch (Exception e) {
+            informacion = "EL Estudiante No está en lista ";
         }
 
         return informacion;
@@ -115,9 +140,13 @@ public class ListaEnlazada {
                 break;
             }
 
-            if (temporal.getSiguiente().getCurso() == 5 || temporal.getCurso() == 5) {
-                temporal.setSiguiente(temporal);
+            if ( temporal.getCurso() == 5) {
+                
+                temporal = temporal.getSiguiente();
+                //break;
+
             }
+
             temporal = temporal.getSiguiente();
         }
 
@@ -133,6 +162,9 @@ public class ListaEnlazada {
 
         for (;;) {
             if (temporal == null) {
+                break;
+            }
+            if (temporal.getSiguiente() == null) {
                 break;
             }
 
@@ -165,6 +197,8 @@ public class ListaEnlazada {
                 break;
             }
 
+       
+
             if (temporal.getSexo().equals("Mujer") && temporal.getCurso() == 5) {
                 nombreMujeres += temporal.getNombre() + "\n";
                 cantidadMujeres++;
@@ -189,9 +223,12 @@ public class ListaEnlazada {
             if (temporal == null) {
                 break;
             }
+
+    
+
             if (temporal.getSexo().equals("Hombre") && temporal.getCurso() == 1) {
                 cantidadHombres++;
-            } else if (temporal.getSexo().equals("Mujer") && temporal.getCurso() == 1  ) {
+            } else if (temporal.getSexo().equals("Mujer") && temporal.getCurso() == 1) {
                 cantidadMujeres++;
             }
             temporal = temporal.getSiguiente();
@@ -203,29 +240,26 @@ public class ListaEnlazada {
                 + "";
     }
 
-    
-    
-    // Metodo para Tester Los Nodos 
-    public void Recorrer(){
-        
+    // Metodo para Tester Los Nodos
+    public void Recorrer() {
+
         Nodo temporal = cabeza;
         for (;;) {
             if (temporal == null) {
                 break;
             }
             String dato = "";
-            dato +=  "[ "+temporal.getNombre()+ " ] -> ";
+            dato += "[ " + temporal.getNombre() + " ] -> ";
 
             if (temporal.getSiguiente() == null) {
                 dato += "null\n";
 
             }
 
-            System.out.print(dato );
+            System.out.print(dato);
             temporal = temporal.getSiguiente();
         }
-        
 
     }
-    
+
 }
